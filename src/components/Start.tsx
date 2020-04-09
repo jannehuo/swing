@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import * as React from "react";
 import { getDays } from "../utils/date";
 import { save } from "../utils/storage";
 
-function Start() {
-  const [total, setTotal] = useState("");
+const Start: React.SFC<{}> = () => {
+  const [total, setTotal] = React.useState<number>(0);
 
-  const createProgram = e => {
+  const createProgram = (e: any) => {
     e.preventDefault();
     const days = getDays();
     const repsPerDay = Math.round(total / days.length);
@@ -33,11 +33,11 @@ function Start() {
       <input
         type="number"
         value={total}
-        onChange={e => setTotal(parseInt(e.target.value, 10))}
+        onChange={(e: any) => setTotal(parseInt(e.target.value, 10))}
       />
       <button onClick={createProgram}>Start</button>
     </React.Fragment>
   );
-}
+};
 
 export default Start;

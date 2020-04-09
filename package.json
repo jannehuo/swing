@@ -1,40 +1,41 @@
 {
   "name": "swing",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
-  },
+  "version": "1.0.0",
+  "description": "**npm start** to run on localhost",
+  "main": "src/index.tsx",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --open",
+    "build": "webpack --env.production --config webpack.config.js",
     "deploy": "gh-pages -d build"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jannehuo/swing.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jannehuo/swing/issues"
   },
+  "homepage": "https://github.com/jannehuo/swing",
   "devDependencies": {
-    "date-fns": "^2.11.1",
-    "gh-pages": "^2.2.0"
+    "@types/react": "^16.9.33",
+    "@types/react-dom": "^16.9.6",
+    "css-loader": "^3.5.1",
+    "gh-pages": "^2.2.0",
+    "html-webpack-plugin": "^4.2.0",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^1.1.3",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   },
-  "homepage": "https://jannehuo.github.io/swing/"
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "date-fns": "^2.11.1"
+  }
 }

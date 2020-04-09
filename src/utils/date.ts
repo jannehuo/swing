@@ -11,9 +11,9 @@ export function getDays() {
     start,
     end
   });
-  const dayslist = days.map((d, i) => ({
+  const dayslist = days.map(d => ({
     date: format(d, "dd.MM.yyyy"),
-    reps: ""
+    reps: 0
   }));
   return dayslist;
 }

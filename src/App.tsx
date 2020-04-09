@@ -1,17 +1,15 @@
-import React, { useState } from "react";
-import Start from "./components/Start";
+import * as React from "react";
+// import Start from "./components/Start";
 import "./App.css";
 
-function App() {
-  const [navOpen, toggleNav] = useState(false);
+const App: React.SFC<{}> = () => {
+  const [navOpen, toggleNav] = React.useState<boolean>(false);
 
-  const toggle = e => {
+  const toggle = (e: any) => {
     e.preventDefault();
     toggleNav(!navOpen);
   };
-
   const navClass = navOpen ? "open" : "";
-  console.log(navClass);
   return (
     <React.Fragment>
       <nav className={navClass}>
@@ -48,6 +46,6 @@ function App() {
       </main>
     </React.Fragment>
   );
-}
+};
 
 export default App;
