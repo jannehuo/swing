@@ -2,8 +2,9 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = env => {
+  const production = env && env.production;
   return {
-    mode: env && env.production ? "production" : "development",
+    mode: production ? "production" : "development",
     entry: "./src/index.ts",
     output: {
       path: path.resolve(__dirname, "build"),
@@ -11,7 +12,7 @@ module.exports = env => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        title: "Swing",
+        title: production ? "Swing" : "Swing: DEV",
         template: "index.html"
       })
     ],
