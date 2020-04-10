@@ -1,0 +1,74 @@
+nav {
+  position: relative;
+  background-color: $app-nav-bg;
+  width: 260px;
+  padding: $app-unit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .toggle-menu {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: -100px;
+  }
+  @media screen and (max-width: 960px) {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+    -webkit-transform: translateX(-100%);
+    -webkit-transition: transform 0.2s ease;
+    .toggle-menu {
+      display: block;
+      z-index: 10;
+    }
+    .nav-top {
+      margin-top: $app-unit * 2;
+    }
+    &.open {
+      transform: translateX(0);
+      -webkit-transform: translateX(0);
+      z-index: 5;
+      .toggle-menu {
+        left: 0;
+      }
+    }
+  }
+}
+
+.nav-links {
+  .nav-button {
+    display: block;
+    width: 100%;
+    font-size: $font-size-md;
+  }
+  li {
+    position: relative;
+    &:after {
+      content: "";
+      width: 0%;
+      height: 2px;
+      background: rgb(94, 66, 166);
+      background: radial-gradient(
+        circle,
+        rgba(94, 66, 166, 1) 0%,
+        rgba(68, 48, 115, 1) 100%
+      );
+      display: block;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      bottom: 0;
+      transition: width 0.2s ease;
+      -webkit-transition: width 0.2s ease;
+    }
+    &:hover {
+      &:after {
+        width: 80%;
+      }
+    }
+  }
+}

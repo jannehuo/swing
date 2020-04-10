@@ -1,0 +1,17 @@
+.stats {
+  text-transform: uppercase;
+  padding: $app-unit;
+  li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid $purple-light;
+    padding-bottom: $app-unit / 2;
+    margin-bottom: $app-unit / 2;
+    .stats-header {
+      font-weight: 700;
+    }
+    .stats-value {
+      font-size: 0.9em;
+    }
+  }
+}

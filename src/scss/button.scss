@@ -1,0 +1,26 @@
+.btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  color: $white;
+  text-transform: uppercase;
+  font-size: $font-size-default;
+  padding: $app-unit / 2;
+  cursor: pointer;
+  line-height: 1;
+  text-align: center;
+  &--block {
+    width: 100%;
+  }
+}
+
+@keyframes click {
+  from {
+    width: 0%;
+    opacity: 0.8;
+  }
+  to {
+    width: 100%;
+    opacity: 0;
+  }
+}
