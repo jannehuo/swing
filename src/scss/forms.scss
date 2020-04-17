@@ -103,8 +103,7 @@ input {
 }
 
 .start-form {
-  max-width: 600px;
-  width: 100%;
+  @include medium-width-element;
   h1 {
     margin-bottom: $app-unit;
     border-bottom: 1px solid $white;

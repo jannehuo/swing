@@ -1,0 +1,10 @@
+.instuctions-container {
+  @include medium-width-element;
+  border-bottom: 2px dashed;
+  padding-bottom: $app-unit;
+}
+
+.instructions-icon {
+  font-size: 5em;
+  text-align: center;
+}

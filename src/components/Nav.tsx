@@ -1,15 +1,23 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Stats from "./Stats";
+import { HOME_PAGE, NEW_PAGE, EDIT_PAGE } from "../constants";
 
 const Nav: React.SFC<{}> = () => {
   const [navOpen, toggleNav] = React.useState<boolean>(false);
+  const location = useLocation();
+
+  React.useEffect(() => {
+    toggleNav(false);
+  }, [location]);
 
   const toggle = (e: any) => {
     e.preventDefault();
     toggleNav(!navOpen);
   };
+
   const navClass = navOpen ? "open" : "";
+
   return (
     <nav className={navClass}>
       <button onClick={toggle} className="btn toggle-menu">
@@ -19,19 +27,34 @@ const Nav: React.SFC<{}> = () => {
       <div className="nav-top">
         <ul className="nav-links">
           <li>
-            <Link to="/" className="btn nav-button">
+            <NavLink
+              activeClassName="current"
+              to={HOME_PAGE}
+              className="btn nav-button"
+              exact
+            >
               home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/new" className="btn nav-button">
+            <NavLink
+              activeClassName="current"
+              to={NEW_PAGE}
+              className="btn nav-button"
+              exact
+            >
               new
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="edit" className="btn nav-button">
+            <NavLink
+              activeClassName="current"
+              to={EDIT_PAGE}
+              className="btn nav-button"
+              exact
+            >
               edit
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>

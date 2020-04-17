@@ -4,10 +4,11 @@ import {
   getDays,
   checkDate,
   checkIfEndIsAfterStart,
-  checkStartDate
+  checkStartDate,
 } from "../utils/date";
-import { save } from "../utils/storage";
 import { focusOnFirstError, shakeErrorElements } from "../utils/interaction";
+import { Iprogram } from "../interfaces";
+import AppContext from "../context";
 
 interface Ivalid {
   total: boolean;
@@ -31,7 +32,7 @@ function checkValues(total: string, start: string, end: string) {
     end: validEnd,
     total: totalNotZero,
     endIsAfterStart,
-    startIsNotInPast
+    startIsNotInPast,
   };
 }
 
@@ -39,7 +40,7 @@ function dataHasErrors(valueErrors: object) {
   return Object.values(valueErrors).includes(false);
 }
 
-const Start: React.SFC<RouteComponentProps> = props => {
+const Start: React.SFC<RouteComponentProps> = (props) => {
   const [total, setTotal] = React.useState<string>("");
   const [start, setStart] = React.useState<string>("");
   const [end, setEnd] = React.useState<string>("");
@@ -49,9 +50,9 @@ const Start: React.SFC<RouteComponentProps> = props => {
     start: true,
     end: true,
     endIsAfterStart: true,
-    startIsNotInPast: true
+    startIsNotInPast: true,
   });
-
+  const data = React.useContext(AppContext);
   React.useEffect(() => {
     const hasErrors = dataHasErrors(isValid);
     if (hasErrors) {
@@ -75,12 +76,13 @@ const Start: React.SFC<RouteComponentProps> = props => {
       }
       return day;
     });
-    const programData = {
-      total,
+    const programData: Iprogram = {
+      total: totalNum,
       left: 0,
-      days: daysWithReps
+      done: 0,
+      days: daysWithReps,
     };
-    save("program", programData);
+    data.update(programData);
     setSuccess(true);
     setTimeout(() => {
       props.history.push("/");
@@ -112,10 +114,10 @@ const Start: React.SFC<RouteComponentProps> = props => {
             <li className={`${total.length > 0 ? "set" : ""}`}>
               Set goal for your challenge
             </li>
-            <li>Create</li>
+            <li className={`${success ? "set" : ""}`}>Create</li>
           </ol>
         </div>
-        <h1>Create new a challenge</h1>
+        <h1>Create a new challenge</h1>
         {!success && (
           <form onSubmit={checkInputs}>
             <div

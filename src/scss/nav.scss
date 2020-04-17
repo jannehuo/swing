@@ -43,6 +43,12 @@ nav {
     display: block;
     width: 100%;
     font-size: $font-size-md;
+    transition: font-size 0.2s ease;
+    text-decoration: none;
+    &.current {
+      font-weight: 700;
+      font-size: $font-size-lg;
+    }
   }
   li {
     position: relative;
