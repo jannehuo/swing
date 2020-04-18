@@ -1,7 +1,9 @@
 .instuctions-container {
   @include medium-width-element;
-  border-bottom: 2px dashed;
   padding-bottom: $app-unit;
+  h1 {
+    border-bottom: 2px dashed;
+  }
 }
 
 .instructions-icon {

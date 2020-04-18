@@ -52,7 +52,10 @@ const Start: React.SFC<RouteComponentProps> = (props) => {
     endIsAfterStart: true,
     startIsNotInPast: true,
   });
+  const [exitAnim, setExitAnim] = React.useState<boolean>(false);
   const data = React.useContext(AppContext);
+  const { localizations } = data;
+  const content: any = localizations;
 
   React.useEffect(() => {
     const hasErrors = dataHasErrors(isValid);
@@ -84,7 +87,10 @@ const Start: React.SFC<RouteComponentProps> = (props) => {
       days: daysWithReps,
     };
     data.update(programData);
-    setSuccess(true);
+    setExitAnim(true);
+    setTimeout(() => {
+      setSuccess(true);
+    }, 500);
     setTimeout(() => {
       props.history.push("/");
     }, 3000);
@@ -107,120 +113,132 @@ const Start: React.SFC<RouteComponentProps> = (props) => {
         <div className="form-help">
           <ol>
             <li className={`${start.length > 0 ? "set" : ""}`}>
-              Set start date for your challenge
+              {content.start.steps[0]}
             </li>
             <li className={`${end.length > 0 ? "set" : ""}`}>
-              Set end date for your challenge
+              {content.start.steps[1]}
             </li>
             <li className={`${total.length > 0 ? "set" : ""}`}>
-              Set goal for your challenge
+              {content.start.steps[2]}
             </li>
-            <li className={`${success ? "set" : ""}`}>Create</li>
+            <li className={`${success ? "set" : ""}`}>
+              {content.start.steps[3]}
+            </li>
           </ol>
         </div>
-        <h1>Create a new challenge</h1>
         {!success && (
-          <form onSubmit={checkInputs}>
-            <div
-              className={`${
-                isValid.start && isValid.startIsNotInPast
-                  ? "input-row "
-                  : "input-row input-row--has-error"
-              }`}
-            >
-              <div className="input-container">
-                <label htmlFor="start">
-                  start <i className="fas fa-calendar-day"></i>
-                </label>
-                <input
-                  id="start"
-                  type="date"
-                  value={start}
-                  onChange={(e: any) => setStart(e.target.value)}
-                  aria-labelledby="start-error"
-                  aria-invalid={!isValid.start || !isValid.startIsNotInPast}
-                />
+          <div
+            className={`${
+              exitAnim ? "start-form-container exit" : "start-form-container"
+            }`}
+          >
+            <h1>{content.start.header}</h1>
+            <form onSubmit={checkInputs}>
+              <div
+                className={`${
+                  isValid.start && isValid.startIsNotInPast
+                    ? "input-row "
+                    : "input-row input-row--has-error"
+                }`}
+              >
+                <div className="input-container">
+                  <label htmlFor="start">
+                    {content.start.startDate}{" "}
+                    <i className="fas fa-calendar-day"></i>
+                  </label>
+                  <input
+                    id="start"
+                    type="date"
+                    value={start}
+                    onChange={(e: any) => setStart(e.target.value)}
+                    aria-labelledby="start-error"
+                    aria-invalid={!isValid.start || !isValid.startIsNotInPast}
+                  />
+                </div>
+                <div className="error-container">
+                  {!isValid.start && (
+                    <div id="start-error" className="input-error">
+                      {content.errors.startDateNotSet}
+                    </div>
+                  )}
+                  {!isValid.startIsNotInPast && (
+                    <div className="input-error">
+                      {content.errors.startDateValue}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="error-container">
-                {!isValid.start && (
-                  <div id="start-error" className="input-error">
-                    Start date has to be set
-                  </div>
-                )}
-                {!isValid.startIsNotInPast && (
-                  <div className="input-error">
-                    Start date has to be today or in the future
-                  </div>
-                )}
+              <div
+                className={`${
+                  isValid.end ? "input-row " : "input-row input-row--has-error"
+                }`}
+              >
+                <div className="input-container">
+                  <label htmlFor="end">
+                    {content.start.endDate}{" "}
+                    <i className="fas fa-calendar-day"></i>
+                  </label>
+                  <input
+                    id="end"
+                    type="date"
+                    value={end}
+                    onChange={(e: any) => setEnd(e.target.value)}
+                    aria-labelledby="end-error"
+                    aria-invalid={!isValid.end || !isValid.endIsAfterStart}
+                  />
+                </div>
+                <div className="error-container">
+                  {!isValid.end && (
+                    <div id="end-error" className="input-error">
+                      {content.errors.endDateNotSet}
+                    </div>
+                  )}
+                  {!isValid.endIsAfterStart && (
+                    <div className="input-error">
+                      {content.errors.endDateValue}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-            <div
-              className={`${
-                isValid.end ? "input-row " : "input-row input-row--has-error"
-              }`}
-            >
-              <div className="input-container">
-                <label htmlFor="end">
-                  end <i className="fas fa-calendar-day"></i>
-                </label>
-                <input
-                  id="end"
-                  type="date"
-                  value={end}
-                  onChange={(e: any) => setEnd(e.target.value)}
-                  aria-labelledby="end-error"
-                  aria-invalid={!isValid.end || !isValid.endIsAfterStart}
-                />
+              <div
+                className={`${
+                  isValid.total
+                    ? "input-row "
+                    : "input-row input-row--has-error"
+                }`}
+              >
+                <div className="input-container">
+                  <label htmlFor="goal">
+                    {content.start.goal} <i className="fas fa-trophy"></i>
+                  </label>
+                  <input
+                    id="goal"
+                    type="number"
+                    value={total}
+                    onChange={(e: any) => setTotal(e.target.value)}
+                    aria-labelledby="total-error"
+                    aria-invalid={!isValid.total}
+                  />
+                </div>
+                <div className="error-container">
+                  {!isValid.total && (
+                    <div id="total-error" className="input-error">
+                      {content.errors.goalNotSet}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="error-container">
-                {!isValid.end && (
-                  <div id="end-error" className="input-error">
-                    End date has to be set
-                  </div>
-                )}
-                {!isValid.endIsAfterStart && (
-                  <div className="input-error">
-                    End date has to be after start date
-                  </div>
-                )}
-              </div>
-            </div>
-            <div
-              className={`${
-                isValid.total ? "input-row " : "input-row input-row--has-error"
-              }`}
-            >
-              <div className="input-container">
-                <label htmlFor="goal">
-                  Goal <i className="fas fa-trophy"></i>
-                </label>
-                <input
-                  id="goal"
-                  type="number"
-                  value={total}
-                  onChange={(e: any) => setTotal(e.target.value)}
-                  aria-labelledby="total-error"
-                  aria-invalid={!isValid.total}
-                />
-              </div>
-              <div className="error-container">
-                {!isValid.total && (
-                  <div id="total-error" className="input-error">
-                    Goal has to be set
-                  </div>
-                )}
-              </div>
-            </div>
-            <button className="btn btn--block" type="submit">
-              create
-            </button>
-          </form>
+              <button className="btn btn--block" type="submit">
+                {content.common.create}
+              </button>
+            </form>
+          </div>
         )}
         {success && (
           <div className="form-success">
-            <h2>Success!</h2>
+            <h2>{content.start.successHeader}</h2>
             <i className="fas fa-thumbs-up"></i>
-            <p>Challenge saved</p>
+            <p>{content.start.successText}</p>
           </div>
         )}
       </div>

@@ -8,6 +8,7 @@
 @import "scss/button.scss";
 @import "scss/stats.scss";
 @import "scss/instructions.scss";
+@import "scss/program.scss";
 
 * {
   box-sizing: border-box;
@@ -18,7 +19,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: $base-font-family, sans-serif;
-  color: $white;
+  color: $main-font-color;
   font-size: $base-font-size;
 }
 

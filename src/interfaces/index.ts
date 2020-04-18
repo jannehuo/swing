@@ -4,9 +4,3 @@ export interface Iprogram {
   done: number;
   days: Array<{ date: string; reps: number }>;
 }
-
-export interface ILocale {
-  [key: string]: {
-    [key: string]: any;
-  };
-}

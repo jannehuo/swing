@@ -1,28 +1,26 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { NEW_PAGE } from "../constants";
+import AppContext from "../context";
 
 const Instructions: React.SFC<{}> = () => {
+  const data = React.useContext(AppContext);
+  const { localizations } = data;
+  const content: any = localizations;
   return (
     <div className="flex-container flex-container--column flex-container--center-content">
       <div className="instuctions-container">
-        <div className="instructions-icon">
+        <div className="instructions-icon margin-bottom">
           <i className="fas fa-lightbulb"></i>
         </div>
-        <h1>You have no active challenges</h1>
+        <h1>{content.instructions.header}</h1>
         <p className="margin-top margin-bottom">
-          Start by creating a challenge for yourself. It can be pushups, squats,
-          kettlebell swings or whatever you decide.
+          {content.instructions.infoText}
         </p>
         <ol>
-          <li>Set start date for your challenge</li>
-          <li>Set end date for your challenge</li>
-          <li>Set goal for your challenge</li>
-          <li>
-            <Link to={NEW_PAGE} className="text-bold">
-              Create <i className="fas fa-arrow-right"></i>
-            </Link>
-          </li>
+          {content.instructions.steps.map((step: string, i: number) => (
+            <li key={i}>{step}</li>
+          ))}
         </ol>
       </div>
     </div>

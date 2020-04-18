@@ -14,7 +14,8 @@ const Nav: React.SFC<{}> = () => {
   const [navOpen, toggleNav] = React.useState<boolean>(false);
   const location = useLocation();
   const data = React.useContext(AppContext);
-
+  const { localizations } = data;
+  const content: any = localizations;
   React.useEffect(() => {
     toggleNav(false);
   }, [location]);
@@ -46,7 +47,8 @@ const Nav: React.SFC<{}> = () => {
               className="btn nav-button"
               exact
             >
-              home
+              {content.nav.frontpageBtn}
+              <i className="fas fa-home"></i>
             </NavLink>
           </li>
           <li>
@@ -56,7 +58,8 @@ const Nav: React.SFC<{}> = () => {
               className="btn nav-button"
               exact
             >
-              new
+              {content.nav.newBtn}
+              <i className="fas fa-plus-square"></i>
             </NavLink>
           </li>
           <li>
@@ -66,23 +69,22 @@ const Nav: React.SFC<{}> = () => {
               className="btn nav-button"
               exact
             >
-              edit
+              {content.nav.editBtn}
+              <i className="fas fa-edit"></i>
             </NavLink>
           </li>
         </ul>
       </div>
       <div className="nav-bottom">
         <Stats />
-        <ul>
-          <li>
-            <button className="btn" onClick={(e) => changeLang(e, LOCALE_FI)}>
-              {LOCALE_FI}
-            </button>
-            <button className="btn" onClick={(e) => changeLang(e, LOCALE_EN)}>
-              {LOCALE_EN}
-            </button>
-          </li>
-        </ul>
+        <div className="text-center">
+          <button className="btn" onClick={(e) => changeLang(e, LOCALE_FI)}>
+            {LOCALE_FI}
+          </button>
+          <button className="btn" onClick={(e) => changeLang(e, LOCALE_EN)}>
+            {LOCALE_EN}
+          </button>
+        </div>
       </div>
     </nav>
   );

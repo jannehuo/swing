@@ -1,6 +1,4 @@
-import { ILocale } from "../interfaces";
-
-export default <ILocale>{
+const localizations: any = {
   errors: {
     startDateNotSet: "Start date has to be set",
     startDateValue: "Start date has to be today or in the future",
@@ -33,7 +31,12 @@ export default <ILocale>{
       "Create",
     ],
   },
-  program: {},
+  program: {
+    reps: "Reps",
+    date: "Day",
+    done: "Done",
+    markAsDone: "Mark as done",
+  },
   start: {
     steps: [
       "Set start date for your challenge",
@@ -54,3 +57,5 @@ export default <ILocale>{
     done: "done",
   },
 };
+
+export default localizations;

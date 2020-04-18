@@ -1,6 +1,4 @@
-import { ILocale } from "../interfaces";
-
-export default <ILocale>{
+const localizations: any = {
   errors: {
     startDateNotSet: "Aloitus päivämäärä on pakollinen",
     startDateValue: "Aloitus päivämäärä voi olla tänään tai tulevaisuudessa",
@@ -33,7 +31,12 @@ export default <ILocale>{
       "Luo uusi",
     ],
   },
-  program: {},
+  program: {
+    reps: "Toistot",
+    date: "Päivä",
+    done: "Tehty",
+    markAsDone: "Merkkaa valmiiksi",
+  },
   start: {
     steps: [
       "Päätä aloituspäivä",
@@ -54,3 +57,5 @@ export default <ILocale>{
     done: "tehty",
   },
 };
+
+export default localizations;

@@ -1,0 +1,51 @@
+@mixin card-style($color) {
+  .program-day-card-bottom {
+    background-color: $color;
+  }
+  .program-day-card-content {
+    background-color: darken($color, 5%);
+  }
+}
+
+.program-days-container {
+  display: flex;
+  flex-wrap: wrap;
+  .program-day-card {
+    width: calc(25% - #{$app-unit});
+    margin: $app-unit / 2;
+    overflow: hidden;
+    border-radius: 5px;
+    @include card-style($app-nav-bg);
+    &.done {
+      @include card-style($green);
+    }
+    &.current {
+      @include card-style($orange);
+    }
+    &.missed {
+      @include card-style($red);
+    }
+    .program-day-card-content {
+      min-height: 150px;
+    }
+    .program-day-card-bottom {
+      display: flex;
+      flex-direction: row;
+      padding: $app-unit / 2;
+      font-size: $font-size-sm;
+      div {
+        text-align: center;
+        width: 33.333%;
+      }
+      .program-day-card-button {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        border: none;
+        font-size: $font-size-md;
+        color: $main-font-color;
+        cursor: pointer;
+      }
+    }
+  }
+}

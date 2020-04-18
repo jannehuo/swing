@@ -5,6 +5,7 @@ import Home from "./views/Home";
 import Edit from "./views/Edit";
 import New from "./views/New";
 import { get, save } from "./utils/storage";
+import { isEmptyObject } from "./utils/";
 import { Iprogram } from "./interfaces";
 import AppContext from "./context";
 import { DEFAULT_LOCALE } from "./constants";
@@ -28,6 +29,9 @@ const App: React.SFC<{}> = () => {
     const newLocale = switchLocale(locale);
     setLocalizations(newLocale);
   };
+  if (isEmptyObject(localizations)) {
+    return null;
+  }
 
   return (
     <>
