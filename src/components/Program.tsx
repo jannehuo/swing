@@ -1,41 +1,61 @@
 import * as React from "react";
 import AppContext from "../context";
 import { formatDateString, checkIfDateIsToday } from "../utils/date";
+import { Iprogram, IDay } from "../interfaces";
+
+function getCardClass(isToday: boolean, isMissed: boolean, isDone: boolean) {
+  if (isToday) {
+    return "current";
+  }
+  if (isMissed) {
+    return "missed";
+  }
+  if (isDone) {
+    return "done";
+  }
+  return "";
+}
 
 const Program: React.SFC<{}> = () => {
   const data = React.useContext(AppContext);
-  const { program } = data;
   const localizations: any = data.localizations;
-  const programData = {
-    ...program,
-    days: program.days.map((day) => ({
-      ...day,
-      current: checkIfDateIsToday(day.date),
-    })),
-  };
+  const program: Iprogram = data.program;
   return (
     <div className="program-days-container">
-      {programData.days.map((data, i) => (
-        <div className="program-day-card" key={i}>
-          <div className="program-day-card-content">
-            <div>
-              <p className="text-bold">{localizations.program.reps}</p>
-              <p>{data.reps}</p>
+      {program.days.map((data, i) => {
+        const isToday = checkIfDateIsToday(data.date);
+        const statusClass = getCardClass(isToday, false, false);
+        return (
+          <div className={`program-day-card ${statusClass}`} key={i}>
+            <div className="program-day-card-content">
+              <div className="program-day-card-date">
+                <p>{formatDateString(data.date)}</p>
+              </div>
+            </div>
+            <div className="program-day-card-side">
+              <div className="program-day-card-daily-graph">
+                <div className="daily-graph-container">
+                  <div className="daily-graph-bar"></div>
+                </div>
+              </div>
+              <div className="program-day-card-side-reps">
+                <p>{localizations.program.reps}</p>
+                <p>
+                  {data.dailyGoal}/{data.reps}
+                </p>
+              </div>
+              <div className="program-day-card-side-button">
+                <button className="program-day-card-button">
+                  <div>{localizations.program.markAsDone}</div>
+                  <div>
+                    <i className="fas fa-check"></i>
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
-          <div className="program-day-card-bottom">
-            <div>
-              <p className="text-bold">{localizations.program.date}</p>
-              <p>{formatDateString(data.date)}</p>
-            </div>
-            <div>
-              <button className="program-day-card-button">
-                <i className="fas fa-check"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

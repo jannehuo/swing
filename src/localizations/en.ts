@@ -32,10 +32,10 @@ const localizations: any = {
     ],
   },
   program: {
-    reps: "Reps",
+    reps: "Goal",
     date: "Day",
     done: "Done",
-    markAsDone: "Mark as done",
+    markAsDone: "Save",
   },
   start: {
     steps: [

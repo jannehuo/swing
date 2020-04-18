@@ -32,10 +32,10 @@ const localizations: any = {
     ],
   },
   program: {
-    reps: "Toistot",
+    reps: "Tavoite",
     date: "Päivä",
     done: "Tehty",
-    markAsDone: "Merkkaa valmiiksi",
+    markAsDone: "Tallenna",
   },
   start: {
     steps: [

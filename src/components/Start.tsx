@@ -74,9 +74,12 @@ const Start: React.SFC<RouteComponentProps> = (props) => {
     const lastIndex = days.length - 1;
     const daysWithReps = days.map((day, i) => {
       if (i === lastIndex) {
-        day.reps = repsPerDay - difference;
+        const reps = repsPerDay - difference;
+        day.reps = reps;
+        day.dailyGoal = reps;
       } else {
         day.reps = repsPerDay;
+        day.dailyGoal = repsPerDay;
       }
       return day;
     });

@@ -13,6 +13,7 @@ export function getDays(start: Date, end: Date) {
   const dayslist = days.map((d) => ({
     date: format(d, "dd-MM-yyyy"),
     reps: 0,
+    dailyGoal: 0,
   }));
   return dayslist;
 }

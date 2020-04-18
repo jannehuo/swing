@@ -31,7 +31,7 @@ const App: React.SFC<{}> = () => {
     const newLocale = switchLocale(locale);
     setLocalizations(newLocale);
   };
-  if (isEmptyObject(localizations)) {
+  if (isEmptyObject(localizations) || !program) {
     return null;
   }
 
