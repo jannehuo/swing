@@ -32,6 +32,7 @@ const localizations: any = {
     ],
   },
   program: {
+    header: "Your challenge",
     reps: "Goal",
     date: "Day",
     done: "Done",

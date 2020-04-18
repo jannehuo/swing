@@ -32,6 +32,7 @@ const localizations: any = {
     ],
   },
   program: {
+    header: "Haasteesi",
     reps: "Tavoite",
     date: "Päivä",
     done: "Tehty",

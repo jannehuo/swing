@@ -22,6 +22,7 @@ const Program: React.SFC<{}> = () => {
   const program: Iprogram = data.program;
   return (
     <div className="program-days-container">
+      <h1>{localizations.program.header}</h1>
       {program.days.map((data, i) => {
         const isToday = checkIfDateIsToday(data.date);
         const statusClass = getCardClass(isToday, false, false);
