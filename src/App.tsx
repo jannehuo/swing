@@ -17,7 +17,9 @@ const App: React.SFC<{}> = () => {
   const [localizations, setLocalizations] = React.useState<Object>({});
   React.useEffect(() => {
     setProgram(get("program"));
-    setLocalizations(getLocales(DEFAULT_LOCALE));
+    const storedLocale = localStorage.getItem("locale");
+    const locale = storedLocale || DEFAULT_LOCALE;
+    setLocalizations(getLocales(locale));
   }, []);
 
   const update = (values: Iprogram) => {

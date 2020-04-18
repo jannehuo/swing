@@ -17,15 +17,16 @@ const Program: React.SFC<{}> = () => {
     <div className="program-days-container">
       {programData.days.map((data, i) => (
         <div className="program-day-card" key={i}>
-          <div className="program-day-card-content"></div>
+          <div className="program-day-card-content">
+            <div>
+              <p className="text-bold">{localizations.program.reps}</p>
+              <p>{data.reps}</p>
+            </div>
+          </div>
           <div className="program-day-card-bottom">
             <div>
               <p className="text-bold">{localizations.program.date}</p>
               <p>{formatDateString(data.date)}</p>
-            </div>
-            <div>
-              <p className="text-bold">{localizations.program.reps}</p>
-              <p>{data.reps}</p>
             </div>
             <div>
               <button className="program-day-card-button">

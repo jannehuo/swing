@@ -19,8 +19,7 @@
       width: calc(50% - #{$app-unit});
     }
     @media screen and (max-width: 470px) {
-      width: calc(50% - #{$app-unit / 2});
-      margin: $app-unit / 4;
+      width: 100%;
     }
     @include card-style($app-nav-bg);
     &.done {
@@ -34,6 +33,10 @@
     }
     .program-day-card-content {
       min-height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
     .program-day-card-bottom {
       display: flex;
@@ -42,7 +45,7 @@
       font-size: $font-size-sm;
       div {
         text-align: center;
-        width: 33.333%;
+        width: 50%;
       }
       .program-day-card-button {
         width: 100%;
@@ -52,16 +55,6 @@
         font-size: $font-size-md;
         color: $main-font-color;
         cursor: pointer;
-      }
-      @media screen and (max-width: 470px) {
-        flex-direction: column;
-        align-items: center;
-        div {
-          width: 100%;
-          &:not(:last-child) {
-            margin-bottom: $app-unit / 2;
-          }
-        }
       }
     }
   }
