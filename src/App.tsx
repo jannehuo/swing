@@ -7,12 +7,16 @@ import New from "./views/New";
 import { get, save } from "./utils/storage";
 import { Iprogram } from "./interfaces";
 import AppContext from "./context";
+import { DEFAULT_LOCALE } from "./constants";
+import { getLocales, switchLocale } from "./localizations";
 import "./App.scss";
 
 const App: React.SFC<{}> = () => {
   const [program, setProgram] = React.useState<Iprogram | null>(null);
+  const [localizations, setLocalizations] = React.useState<Object>({});
   React.useEffect(() => {
     setProgram(get("program"));
+    setLocalizations(getLocales(DEFAULT_LOCALE));
   }, []);
 
   const update = (values: Iprogram) => {
@@ -20,10 +24,17 @@ const App: React.SFC<{}> = () => {
     save("program", values);
   };
 
+  const changeLang = (locale: string) => {
+    const newLocale = switchLocale(locale);
+    setLocalizations(newLocale);
+  };
+
   return (
     <>
       <Router>
-        <AppContext.Provider value={{ program, update }}>
+        <AppContext.Provider
+          value={{ program, update, localizations, changeLang }}
+        >
           <Nav />
           <main>
             <Route path="/" exact component={Home} />

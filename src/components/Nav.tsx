@@ -1,11 +1,19 @@
 import * as React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import Stats from "./Stats";
-import { HOME_PAGE, NEW_PAGE, EDIT_PAGE } from "../constants";
+import {
+  HOME_PAGE,
+  NEW_PAGE,
+  EDIT_PAGE,
+  LOCALE_EN,
+  LOCALE_FI,
+} from "../constants";
+import AppContext from "../context";
 
 const Nav: React.SFC<{}> = () => {
   const [navOpen, toggleNav] = React.useState<boolean>(false);
   const location = useLocation();
+  const data = React.useContext(AppContext);
 
   React.useEffect(() => {
     toggleNav(false);
@@ -14,6 +22,11 @@ const Nav: React.SFC<{}> = () => {
   const toggle = (e: any) => {
     e.preventDefault();
     toggleNav(!navOpen);
+  };
+
+  const changeLang = (e: any, locale: string) => {
+    e.preventDefault();
+    data.changeLang(locale);
   };
 
   const navClass = navOpen ? "open" : "";
@@ -58,7 +71,19 @@ const Nav: React.SFC<{}> = () => {
           </li>
         </ul>
       </div>
-      <Stats />
+      <div className="nav-bottom">
+        <Stats />
+        <ul>
+          <li>
+            <button className="btn" onClick={(e) => changeLang(e, LOCALE_FI)}>
+              {LOCALE_FI}
+            </button>
+            <button className="btn" onClick={(e) => changeLang(e, LOCALE_EN)}>
+              {LOCALE_EN}
+            </button>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 };

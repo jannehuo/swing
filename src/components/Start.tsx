@@ -53,6 +53,7 @@ const Start: React.SFC<RouteComponentProps> = (props) => {
     startIsNotInPast: true,
   });
   const data = React.useContext(AppContext);
+
   React.useEffect(() => {
     const hasErrors = dataHasErrors(isValid);
     if (hasErrors) {
