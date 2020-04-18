@@ -53,4 +53,7 @@ main {
   @media screen and (max-width: 960px) {
     padding: $app-unit * 4 $app-unit $app-unit $app-unit;
   }
+  @media screen and (max-width: 470px) {
+    padding: $app-unit * 2 $app-unit / 2 $app-unit / 2 $app-unit / 2;
+  }
 }
