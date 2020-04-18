@@ -7,7 +7,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     .circle-chart-background {
-      stroke: $main-font-color;
+      stroke: lighten($app-nav-bg, 5%);
       stroke-width: 1px;
       fill: none;
     }
